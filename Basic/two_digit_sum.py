@@ -330,4 +330,53 @@ settings reverse=True sorts the list in the descending order
 alternatively for sorted() you can use the following code
 sorted(list,reverse=True)
 
+python list copy() 
+the copy() method returns a shallow copy of the list.
+a list can be copied  using the = operator.
+syntax:
+new_list=list.copy()
+copy() parameters
+the copy() method doesn't take any parameters
+
+the copy() method returns a new list.it doesn't modify the original list.
+
 """
+# old_list=[1,2,3]
+# new_list=old_list
+# new_list.append('a')
+# print("new list:",new_list)
+# print("old list:",old_list)
+
+
+# my_list=[1,2,3]
+# new_list=my_list.copy()
+# new_list.append('a')
+# print('new list:',new_list)
+# print('my list:',my_list)
+
+# copy list using slicing syntax
+# list=[1,2,3]
+# new_list=list[:]
+# new_list.append('a')
+# print('new list:',new_list)
+# print('my list:',list)
+
+""" PYTHON LIST clear() method
+the clear() method removes all items from the list.
+syntax:
+list.clear()
+pop() parameters
+the clear() method doesn't take any parameters
+return value from clear()
+the clear() method only empties the given list. it doesn't return any value.
+
+"""
+
+# working with clear method
+# list=[(1,2),('a','b'),{'A':1,'B':2},[1,2]]
+# list.clear()
+# print('list:',list)
+
+list=[{1,2},('a','b'),[1,2]]  # list of sets,tuples and list
+del list[:]
+print('list:',list)
