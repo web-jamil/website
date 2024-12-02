@@ -155,11 +155,11 @@ the values() method returns a view object that displays a list of all values in 
 
 """
 
-sales={'apple':2,'orange':3,'grapes':4}
-values=sales.values()
-print("orginal items:",values)
-del[sales['apple']]
-print("updated items:",values)
+# sales={'apple':2,'orange':3,'grapes':4}
+# values=sales.values()
+# print("orginal items:",values)
+# del[sales['apple']]
+# print("updated items:",values)
 
 """ 
 syntax: 
@@ -246,16 +246,29 @@ my_dict={1:'apple',2:'ball'}
 
 
 
-my_list = [0, 1, 2, 3, 4, 5]
+# my_list = [0, 1, 2, 3, 4, 5]
 
-# Extract a portion of the list
-print(my_list[1:4])  # Output: [1, 2, 3]
+# # Extract a portion of the list
+# print(my_list[1:4])  # Output: [1, 2, 3]
 
-# Omit `start` (defaults to 0)
-print(my_list[:3])  # Output: [0, 1, 2]
+# # Omit `start` (defaults to 0)
+# print(my_list[:3])  # Output: [0, 1, 2]
 
-# Omit `stop` (goes to the end)
-print(my_list[2:])  # Output: [2, 3, 4, 5]
+# # Omit `stop` (goes to the end)
+# print(my_list[2:])  # Output: [2, 3, 4, 5]
 
-# Omit both `start` and `stop` (copy entire list)
-print(my_list[:])  # Output: [0, 1, 2, 3, 4, 5]
+# # Omit both `start` and `stop` (copy entire list)
+# print(my_list[:])  # Output: [0, 1, 2, 3, 4, 5]
+
+# even_squares=[x*x for x in range(10) if x%2==0]
+# print(even_squares)
+
+# nested_list = [[1, 2], [3, 4]]
+# print(nested_list[0][1])  # Output: 2
+
+import math
+nums=[1,2,3,4,5,6,7,8,9,10]
+print(sum(nums))
+print(max(nums))
+print(min(nums))
+print(math.prod(nums))

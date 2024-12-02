@@ -75,3 +75,14 @@ my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 # Combining slicing to get elements from index 1 to 7 with a step of 2
 combined_slicing = my_list[1:8:2]
 print("Combined Slicing (1:8:2):", combined_slicing)  # Output: [2, 4, 6, 8]
+
+squares=[x*x for x in range(6)]
+print(squares)
+
+list=[1,-2,3,4,5,6,7,-8,9,-10]
+new_list=sorted(list)
+my_list.sort(reverse=True)
+print(my_list)
+print(new_list)
+even_squares=[x*x for x in range(10) if x%2==0]
+print(even_squares)
