@@ -277,9 +277,21 @@ my_dict={1:'apple',2:'ball'}
 # string="Jamil is a javascript developer and work to build web applications with the help of Web application frameworks like django and flask ."
 # word=string.split(',',1000)
 # print(word)
-import re
-jamil=re.split(r'\s', string="Jamil is a javascript developer and work to build web applications with the help of Web application frameworks like django and flask .")
-print(jamil)
+# import re
+# jamil=re.split(r'\s', string="Jamil is a javascript developer and work to build web applications with the help of Web application frameworks like django and flask .")
+# print(jamil)
 
-Join_seqence=" ".join(jamil)
-print(Join_seqence)
+# Join_seqence=" ".join(jamil)
+# print(Join_seqence)
+
+
+# original_dict={'jack':38,'michael':48,'guido':57,'john':33}
+# even_dict={k:v for (k,v) in original_dict.items() if v%2!=0 if v<40}
+# print(even_dict)
+
+# original_dict = {'jack': 38, 'michael': 48, 'guido': 57, 'john': 33}
+# new_dict={ k:('old' if v<40 else 'young') for (k,v) in original_dict.items()}
+# print(new_dict)
+
+# dictionary={ k1:{k2:k1*k2 for k2 in range(1,6)} for k1 in range(2,6)}
+# print(dictionary)
