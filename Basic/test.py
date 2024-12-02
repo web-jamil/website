@@ -266,9 +266,20 @@ my_dict={1:'apple',2:'ball'}
 # nested_list = [[1, 2], [3, 4]]
 # print(nested_list[0][1])  # Output: 2
 
-import math
-nums=[1,2,3,4,5,6,7,8,9,10]
-print(sum(nums))
-print(max(nums))
-print(min(nums))
-print(math.prod(nums))
+# import math
+# nums=[1,2,3,4,5,6,7,8,9,10]
+# print(sum(nums))
+# print(max(nums))
+# print(min(nums))
+# print(math.prod(nums))
+
+
+# string="Jamil is a javascript developer and work to build web applications with the help of Web application frameworks like django and flask ."
+# word=string.split(',',1000)
+# print(word)
+import re
+jamil=re.split(r'\s', string="Jamil is a javascript developer and work to build web applications with the help of Web application frameworks like django and flask .")
+print(jamil)
+
+Join_seqence=" ".join(jamil)
+print(Join_seqence)
