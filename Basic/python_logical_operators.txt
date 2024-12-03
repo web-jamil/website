@@ -491,3 +491,358 @@ Here:
 | NOT          | `not`            | Reverses the boolean value of a condition.                    | `not x > 5`                       |
 
 By mastering the syntax and understanding the behavior of logical operators, you can create complex decision-making logic in your Python programs.
+
+
+### **Short-Circuiting in Python:**
+
+**Short-circuiting** refers to the behavior in logical operations (AND, OR) where the second operand is not evaluated if the first operand is sufficient to determine the result of the expression.
+
+This concept is most commonly seen with logical operators like `and` and `or`, which can **short-circuit** the evaluation of the second condition depending on the value of the first.
+
+### **1. Short-Circuiting with `and` Operator**
+
+With the `and` operator, if the first condition is `False`, the second condition is **not evaluated** because the result will always be `False`, no matter what the second condition is.
+
+#### **How `and` Short-Circuiting Works:**
+- The `and` operator returns `True` **only if both operands are true**.
+- If the first condition is `False`, it doesn't need to check the second condition, as the entire expression is already guaranteed to be `False`.
+
+#### **Example:**
+```python
+x = 0
+y = 10
+
+# First condition is False, so second condition is never evaluated (short-circuiting)
+if x > 5 and (y / x > 2):  # This will not raise an exception because y / x is never evaluated
+    print("Both conditions are True")
+else:
+    print("Short-circuiting occurred. First condition is False.")
+```
+**Explanation:**
+- The first condition `x > 5` is `False`, so Python **doesn't evaluate** `y / x`.
+- This prevents a **division by zero error** because `x` is `0`.
+
+### **2. Short-Circuiting with `or` Operator**
+
+With the `or` operator, if the first condition is `True`, the second condition is **not evaluated** because the result is guaranteed to be `True` regardless of the second condition.
+
+#### **How `or` Short-Circuiting Works:**
+- The `or` operator returns `True` **if at least one operand is true**.
+- If the first condition is `True`, it doesn't need to check the second condition because the entire expression is already `True`.
+
+#### **Example:**
+```python
+x = 5
+y = 10
+
+# First condition is True, so second condition is never evaluated (short-circuiting)
+if x > 0 or (y / x > 2):  # The second condition (y / x) is never evaluated
+    print("At least one condition is True.")
+else:
+    print("This will not print.")
+```
+**Explanation:**
+- The first condition `x > 0` is `True`, so Python **doesn't evaluate** `y / x`.
+- This avoids unnecessary computations and potential errors.
+
+### **3. Short-Circuiting in Conditional Statements and Loops**
+
+Short-circuiting is particularly useful when you want to prevent errors or optimize the execution of code.
+
+#### **Example with `if` Statement:**
+```python
+x = 0
+y = 10
+
+# Check if y is non-zero before division to avoid division by zero
+if y != 0 and (10 / y > 2):  # The second condition is only evaluated if y != 0
+    print("The division was successful.")
+else:
+    print("y is zero or the division failed.")
+```
+**Explanation:**
+- The `and` operator short-circuits if `y != 0` is `False`, preventing the division by zero error.
+
+#### **Example with `while` Loop:**
+```python
+x = 0
+while x > 0 and 10 / x > 2:  # The second condition is never evaluated if x <= 0
+    print(x)
+    x -= 1
+```
+**Explanation:**
+- In this loop, the second condition `(10 / x > 2)` is never evaluated if `x` is `0` or negative.
+
+### **4. Short-Circuiting for Performance Optimization**
+
+In certain situations, short-circuiting can improve the **performance** of your program by preventing unnecessary computations. This is especially useful when you have complex expressions that can be avoided based on the result of the first condition.
+
+#### **Example:**
+```python
+def expensive_operation():
+    print("Performing expensive operation...")
+    return True
+
+x = 5
+y = 0
+
+# The expensive operation is only executed if x > 0 and y != 0
+if x > 0 and expensive_operation() and y != 0:
+    print("Operation completed.")
+else:
+    print("Short-circuiting occurred. Expensive operation not performed.")
+```
+**Explanation:**
+- The function `expensive_operation()` is not executed if `x <= 0`, thanks to short-circuiting in the `and` operation.
+
+### **5. Short-Circuiting in Functions and Lambda Expressions**
+
+Short-circuiting is not limited to `if` statements. It applies wherever logical operators are used, including in **lambda expressions** and **functions**.
+
+#### **Example with Lambda Expression:**
+```python
+# Short-circuiting in a lambda expression
+func = lambda x: (x > 0 and 10 / x > 2)
+
+# This will only evaluate 10 / x if x > 0
+print(func(5))  # True
+print(func(0))  # False, without evaluating 10 / 0
+```
+
+#### **Example with Functions:**
+```python
+def check(x):
+    return x > 0
+
+def divide(x):
+    return 10 / x
+
+# Short-circuiting prevents divide() from being called if check() is False
+if check(0) and divide(0):  # divide(0) will never be called because check(0) is False
+    print("All conditions are True.")
+```
+
+### **6. Short-Circuiting and Truth Tables**
+
+- **For `and`**: Short-circuiting happens if the first condition is `False` because the result will be `False` regardless of the second condition.
+- **For `or`**: Short-circuiting happens if the first condition is `True` because the result will be `True` regardless of the second condition.
+
+**Truth Table for `and`**:
+| Condition 1 | Condition 2 | `Condition1 and Condition2` |
+|-------------|-------------|-----------------------------|
+| `False`     | Any value    | `False`                     |
+| `True`      | `False`      | `False`                     |
+| `True`      | `True`       | `True`                      |
+
+**Truth Table for `or`**:
+| Condition 1 | Condition 2 | `Condition1 or Condition2`  |
+|-------------|-------------|-----------------------------|
+| `True`      | Any value    | `True`                      |
+| `False`     | `True`       | `True`                      |
+| `False`     | `False`      | `False`                     |
+
+
+### **7. Summary of Short-Circuiting in Python**
+
+- **`and`**: If the first condition is `False`, the second condition is **not evaluated** because the entire expression will always be `False`.
+- **`or`**: If the first condition is `True`, the second condition is **not evaluated** because the entire expression will always be `True`.
+- **Efficiency**: Short-circuiting can save time and resources by not evaluating expressions that don't need to be checked.
+- **Preventing Errors**: Short-circuiting can help prevent errors (e.g., division by zero) by ensuring that certain parts of an expression are only evaluated when necessary.
+
+By understanding short-circuiting behavior, you can write more efficient and error-free Python code.
+
+
+### **Logical Operators in Python: Syntax and Code Examples**
+
+Logical operators in Python allow you to combine multiple conditional expressions and control the flow of your program based on boolean values. The three main logical operators in Python are **AND**, **OR**, and **NOT**. These operators are used to evaluate **truth values** and help in making complex decisions.
+
+#### **1. Logical AND (`and`) Operator**
+
+The `and` operator returns `True` if **both conditions** are `True`. If either condition is `False`, the result will be `False`. If the first condition is `False`, the second condition is **not evaluated** (short-circuiting).
+
+#### **Syntax:**
+```python
+condition1 and condition2
+```
+
+#### **Example:**
+```python
+x = 10
+y = 5
+
+# Checks if x is greater than 5 and y is less than 10
+if x > 5 and y < 10:
+    print("Both conditions are True.")  # Output: Both conditions are True.
+else:
+    print("At least one condition is False.")
+```
+
+#### **Key Points:**
+- If `condition1` is `False`, `condition2` is not evaluated because the result is already determined to be `False`.
+- Can be used with more than two conditions:
+  ```python
+  if x > 5 and y < 10 and z == 3:
+      print("All conditions are true.")
+  ```
+
+---
+
+#### **2. Logical OR (`or`) Operator**
+
+The `or` operator returns `True` if **at least one condition** is `True`. If both conditions are `False`, it returns `False`. If the first condition is `True`, the second condition is **not evaluated** (short-circuiting).
+
+#### **Syntax:**
+```python
+condition1 or condition2
+```
+
+#### **Example:**
+```python
+x = 3
+y = 10
+
+# Checks if x is greater than 5 or y is less than 15
+if x > 5 or y < 15:
+    print("At least one condition is True.")  # Output: At least one condition is True.
+else:
+    print("Both conditions are False.")
+```
+
+#### **Key Points:**
+- If `condition1` is `True`, `condition2` is not evaluated because the result is already determined to be `True`.
+- Multiple conditions can be combined:
+  ```python
+  if x > 5 or y < 10 or z == 3:
+      print("At least one condition is True.")
+  ```
+
+---
+
+#### **3. Logical NOT (`not`) Operator**
+
+The `not` operator negates the boolean value of the condition. It returns `True` if the condition is `False`, and `False` if the condition is `True`.
+
+#### **Syntax:**
+```python
+not condition
+```
+
+#### **Example:**
+```python
+x = 5
+
+# Checks if x is not less than 10
+if not x < 10:
+    print("x is not less than 10.")  # Output: x is not less than 10.
+else:
+    print("x is less than 10.")
+```
+
+#### **Key Points:**
+- **Inverts** the result of the condition.
+  ```python
+  if not (x > 5 and y < 10):
+      print("The condition is false.")
+  ```
+
+---
+
+### **4. Combining Logical Operators**
+
+You can combine multiple logical operators (`and`, `or`, `not`) in a single expression. Logical operators are evaluated in the following precedence order:
+1. `not` (highest precedence)
+2. `and`
+3. `or` (lowest precedence)
+
+#### **Example:**
+```python
+x = 3
+y = 10
+z = 5
+
+# Checks if x is greater than 2 and (y is less than 12 or z is not 5)
+if x > 2 and (y < 12 or not z == 5):
+    print("Condition is true.")  # Output: Condition is true.
+else:
+    print("Condition is false.")
+```
+
+#### **Key Points:**
+- Parentheses are used to group conditions and control the order of evaluation.
+- You can use logical operators in any combination to create more complex conditions.
+
+---
+
+### **5. Using Logical Operators with Functions**
+
+Logical operators can also be used with functions that return boolean values, allowing you to evaluate more complex conditions.
+
+#### **Example with Functions:**
+```python
+def is_positive(x):
+    return x > 0
+
+def is_even(x):
+    return x % 2 == 0
+
+x = 6
+
+# Checks if x is positive and even
+if is_positive(x) and is_even(x):
+    print("x is positive and even.")  # Output: x is positive and even.
+else:
+    print("x is either negative or odd.")
+```
+
+---
+
+### **6. Logical Operators with `if` Statements**
+
+Logical operators are most commonly used in `if` statements to evaluate multiple conditions.
+
+#### **Example with AND:**
+```python
+age = 18
+has_license = True
+
+# Checks if age is greater than 16 and has a driving license
+if age > 16 and has_license:
+    print("You are allowed to drive.")  # Output: You are allowed to drive.
+else:
+    print("You are not allowed to drive.")
+```
+
+#### **Example with OR:**
+```python
+x = 5
+y = 3
+
+# Checks if x is greater than 10 or y is less than 5
+if x > 10 or y < 5:
+    print("At least one condition is true.")  # Output: At least one condition is true.
+else:
+    print("Both conditions are false.")
+```
+
+#### **Example with NOT:**
+```python
+x = 0
+
+# Checks if x is not equal to 10
+if not x == 10:
+    print("x is not 10.")  # Output: x is not 10.
+else:
+    print("x is 10.")
+```
+
+---
+
+### **7. Summary of Logical Operators Syntax and Use:**
+
+| **Operator** | **Syntax**       | **Description**                                              | **Example**                       |
+|--------------|------------------|--------------------------------------------------------------|-----------------------------------|
+| AND          | `condition1 and condition2` | Returns `True` if both conditions are `True`                   | `x > 5 and y < 10`                |
+| OR           | `condition1 or condition2`  | Returns `True` if at least one condition is `True`             | `x > 5 or y < 10`                 |
+| NOT          | `not condition`        | Returns the inverse of the condition                          | `not x > 5`                       |
+
+By using logical operators efficiently, you can create complex decision-making logic and avoid unnecessary computations, improving the performance and readability of your Python programs.
